@@ -7,7 +7,7 @@ import QuoteCard from "./components/QuoteCard";
 export default function App() {
   const [font, setFont] = useState(fonts[0]);
   const [fontSize, setFontSize] = useState(20);
-  const [background, setBackground] = useState(backgrounds[4]);
+  const [background, setBackground] = useState(backgrounds[5]);
   const [fontColor, setFontColor] = useState(fontColors[3]);
   const [textPosition, setTextPosition] = useState("center");
   const [quote, setQuote] = useState("The only way to do great work is to love what you do.");
