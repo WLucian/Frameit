@@ -1,3 +1,11 @@
+import {
+  AlignLeft,
+  AlignCenter,
+  AlignRight,
+  AlignStartHorizontal,
+  AlignCenterHorizontal,
+  AlignEndHorizontal,
+} from "lucide-react";
 import { fonts, backgrounds, fontColors } from "../data/options";
 import FontPicker from "./FontPicker";
 import BackgroundPicker from "./BackgroundPicker";
@@ -22,6 +30,7 @@ export default function Controls({
   setAlignment,
   setAspectRatio,
   setShowAuthor,
+  setTextPosition,
 }) {
   return (
     <div>
@@ -59,10 +68,55 @@ export default function Controls({
           />
         ))}
       </div>
-      <div>font size here</div>
-      <div>alignment here</div>
-      <div>aspect ratio here</div>
-      <div>show author here</div>
+      <div className="flex gap-2">
+        <button
+          onClick={() => {
+            fontSize > 16 && setFontSize(fontSize - 1);
+          }}>
+          -
+        </button>
+        <p>{fontSize}</p>
+        <button
+          onClick={() => {
+            fontSize < 50 && setFontSize(fontSize + 1);
+          }}>
+          +
+        </button>
+      </div>
+      <div className="flex gap-6">
+        <div className="flex gap-4">
+          <button onClick={() => setAlignment("left")}>
+            <AlignLeft size={18} />
+          </button>
+          <button onClick={() => setAlignment("center")}>
+            <AlignCenter size={18} />
+          </button>
+          <button onClick={() => setAlignment("right")}>
+            <AlignRight size={18} />
+          </button>
+        </div>
+        <div className="flex gap-4">
+          <button onClick={() => setTextPosition("top")}>
+            <AlignStartHorizontal size={18} />
+          </button>
+          <button onClick={() => setTextPosition("center")}>
+            <AlignCenterHorizontal size={18} />
+          </button>
+          <button onClick={() => setTextPosition("bottom")}>
+            <AlignEndHorizontal size={18} />
+          </button>
+        </div>
+      </div>
+      <div className="flex gap-6">
+        <button onClick={() => setAspectRatio("square")}>Square</button>
+        <button onClick={() => setAspectRatio("portrait")}>Portrait</button>
+        <button onClick={() => setAspectRatio("landscape")}>Landscape</button>
+      </div>
+      <div>
+        <button onClick={() => setShowAuthor(!showAuthor)}>
+          {showAuthor ? "Hide Author" : "Show Author"}{" "}
+        </button>
+      </div>
     </div>
   );
 }

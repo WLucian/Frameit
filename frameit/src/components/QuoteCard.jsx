@@ -9,6 +9,7 @@ export default function QuoteCard({
   aspectRatio,
   showAuthor,
   cardRef,
+  textPosition,
 }) {
   const ratioMap = {
     square: "1/1",
@@ -16,14 +17,31 @@ export default function QuoteCard({
     landscape: "16/9",
   };
 
+  const positionMap = {
+    center: "center",
+    top: "flex-start",
+    bottom: "flex-end",
+  };
+
+  const alignMap = {
+    center: "center",
+    left: "flex-start",
+    right: "flex-end",
+  };
+
   return (
     <div>
       <div
-        className="w-full max-h-[80vh] "
+        className="md:w-[60%] max-w-lg max-h-[85vh] overflow-hidden"
         style={{
           background: background.type === "image" ? `url(${background.value})` : background.value,
           aspectRatio: ratioMap[aspectRatio],
           overflow: "hidden",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: alignMap[alignment],
+          justifyContent: positionMap[textPosition],
+          padding: "15px",
         }}
         ref={cardRef}>
         <div
@@ -33,8 +51,8 @@ export default function QuoteCard({
             fontSize: fontSize,
             color: fontColor.hex,
           }}>
-          <p>{quote}</p>
-          {showAuthor && <p>{author}</p>}
+          <p className="leading-none">"{quote}"</p>
+          {showAuthor && <p>-{author}</p>}
         </div>
       </div>
     </div>

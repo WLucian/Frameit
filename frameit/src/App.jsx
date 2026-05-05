@@ -8,7 +8,8 @@ export default function App() {
   const [font, setFont] = useState(fonts[0]);
   const [fontSize, setFontSize] = useState(20);
   const [background, setBackground] = useState(backgrounds[4]);
-  const [fontColor, setFontColor] = useState(fontColors[0]);
+  const [fontColor, setFontColor] = useState(fontColors[3]);
+  const [textPosition, setTextPosition] = useState("center");
   const [quote, setQuote] = useState("The only way to do great work is to love what you do.");
   const [author, setAuthor] = useState("Steve Jobs");
   const [alignment, setAlignment] = useState("center");
@@ -18,7 +19,7 @@ export default function App() {
   const cardRef = useRef(null);
 
   const downloadCard = async () => {
-    const canvas = await html2canvas(cardRef.current);
+    const canvas = await html2canvas(cardRef.current, { useCORS: true, allowTaint: true });
     const image = canvas.toDataURL("image/png");
     const link = document.createElement("a");
     link.download = "frameit-card.png";
@@ -37,6 +38,7 @@ export default function App() {
     showAuthor,
     cardRef,
     aspectRatio,
+    textPosition,
   };
 
   const controlProps = {
@@ -49,6 +51,7 @@ export default function App() {
     alignment,
     showAuthor,
     aspectRatio,
+    textPosition,
     setFont,
     setFontSize,
     setFontColor,
@@ -58,6 +61,7 @@ export default function App() {
     setAlignment,
     setAspectRatio,
     setShowAuthor,
+    setTextPosition,
   };
 
   useEffect(() => {
