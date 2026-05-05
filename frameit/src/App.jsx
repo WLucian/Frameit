@@ -71,18 +71,20 @@ export default function App() {
   }, []);
 
   return (
-    <div className="w-full">
-      <div>
-        <h2>
-          Frame <span>it</span>
-        </h2>
+    <div className="min-h-screen bg-[#0f1117] p-4 md:p-6">
+      <div className="py-4">
+        <h1 className="text-white text-2xl font-bold tracking-tight">
+          Frame<span className="text-purple-400">it</span>
+        </h1>
       </div>
-      <div className="flex flex-col h-screen  md:flex-row w-full items-start">
-        <div className="md:w-[60%] max-h-screen max-w-lg">
+      <div className="flex flex-col md:flex-row w-full gap-6 items-start">
+        <div className="md:w-[60%] flex flex-col gap-3">
           <QuoteCard {...cardProps} />
-          <button onClick={downloadCard}>Download as Image</button>
+          <button onClick={downloadCard} className="text-white text-sm">
+            Download as Image
+          </button>
         </div>
-        <div className="md:w-[40%]">
+        <div className="md:w-[40%] bg-[#1a1d26] rounded-xl p-4">
           <Controls {...controlProps} />
         </div>
       </div>

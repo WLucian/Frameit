@@ -30,30 +30,31 @@ export default function QuoteCard({
   };
 
   return (
-    <div>
+    <div
+      className="w-full"
+      style={{
+        background:
+          background.type === "image"
+            ? `url(${background.value}) center/cover no-repeat`
+            : background.value,
+        aspectRatio: ratioMap[aspectRatio],
+        overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: alignMap[alignment],
+        justifyContent: positionMap[textPosition],
+        padding: "15px",
+      }}
+      ref={cardRef}>
       <div
-        className="md:w-[60%] max-w-lg max-h-[85vh] overflow-hidden"
         style={{
-          background: background.type === "image" ? `url(${background.value})` : background.value,
-          aspectRatio: ratioMap[aspectRatio],
-          overflow: "hidden",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: alignMap[alignment],
-          justifyContent: positionMap[textPosition],
-          padding: "15px",
-        }}
-        ref={cardRef}>
-        <div
-          style={{
-            fontFamily: font.fontFamily,
-            textAlign: alignment,
-            fontSize: fontSize,
-            color: fontColor.hex,
-          }}>
-          <p className="leading-none">"{quote}"</p>
-          {showAuthor && <p>-{author}</p>}
-        </div>
+          fontFamily: font.fontFamily,
+          textAlign: alignment,
+          fontSize: fontSize,
+          color: fontColor.hex,
+        }}>
+        <p className="leading-none">"{quote}"</p>
+        {showAuthor && <p>-{author}</p>}
       </div>
     </div>
   );
