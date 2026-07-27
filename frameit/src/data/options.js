@@ -55,6 +55,26 @@ export const backgrounds = [
     value: "#1a3c34",
   },
   {
+    label: "Ivory",
+    type: "plain",
+    value: "#F7F1E6",
+  },
+  {
+    label: "Charcoal",
+    type: "plain",
+    value: "#211C17",
+  },
+  {
+    label: "Rose",
+    type: "plain",
+    value: "#8a4e56",
+  },
+  {
+    label: "Amber",
+    type: "plain",
+    value: "#B4791E",
+  },
+  {
     label: "Mountains",
     type: "image",
     value: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
@@ -104,6 +124,22 @@ export const fontColors = [
   {
     name: "Lavender",
     hex: "#c77dff",
+  },
+  {
+    name: "Charcoal",
+    hex: "#211C17",
+  },
+  {
+    name: "Rose",
+    hex: "#8a4e56",
+  },
+  {
+    name: "Amber",
+    hex: "#B4791E",
+  },
+  {
+    name: "Ivory",
+    hex: "#F7F1E6",
   },
   {
     name: "Rose",

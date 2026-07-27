@@ -43,7 +43,7 @@ export default function QuoteCard({
         flexDirection: "column",
         alignItems: alignMap[alignment],
         justifyContent: positionMap[textPosition],
-        padding: "15px",
+        padding: "22px",
       }}
       ref={cardRef}>
       <div
@@ -52,9 +52,10 @@ export default function QuoteCard({
           textAlign: alignment,
           fontSize: fontSize,
           color: fontColor.hex,
+          lineHeight: 1.3,
         }}>
-        <p className="leading-none">"{quote}"</p>
-        {showAuthor && <p>-{author}</p>}
+        <p>"{quote}"</p>
+        {showAuthor && <p className="mt-2" style={{ fontSize: "0.6em", opacity: 0.8 }}>— {author}</p>}
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import Controls from "./components/Controls";
 import { fonts, backgrounds, fontColors } from "./data/options";
 import html2canvas from "html2canvas";
 import QuoteCard from "./components/QuoteCard";
+import { Download } from "lucide-react";
 
 export default function App() {
   const [font, setFont] = useState(fonts[0]);
@@ -70,21 +71,45 @@ export default function App() {
     }
   }, []);
 
+  const ratioLabel =
+    aspectRatio === "square" ? "1 : 1" : aspectRatio === "portrait" ? "9 : 16" : "16 : 9";
+
   return (
-    <div className="min-h-screen bg-[#0f1117] p-4 md:p-6">
-      <div className="py-4">
-        <h1 className="text-white text-2xl font-bold tracking-tight">
-          Frame<span className="text-purple-400">it</span>
+    <div className="min-h-screen bg-[#FBF8F2] p-4 sm:p-6 md:p-10">
+      <div className="mb-6 sm:mb-8">
+        <h1
+          className="text-xl sm:text-2xl tracking-tight text-[#211C17]"
+          style={{ fontFamily: "Fraunces, serif" }}>
+          Frame<span className="text-[#B4791E]">it</span>
         </h1>
+        <p className="text-[12px] sm:text-[13px] text-[#8a8378] mt-1">
+          Turn a quote into something worth framing.
+        </p>
       </div>
-      <div className="flex flex-col md:flex-row w-full gap-6 items-start">
-        <div className="md:w-[60%] flex flex-col gap-3">
-          <QuoteCard {...cardProps} />
-          <button onClick={downloadCard} className="text-white text-sm">
-            Download as Image
+
+      <div className="flex flex-col lg:flex-row w-full gap-6 sm:gap-8 items-center lg:items-start">
+        <div className="lg:w-[58%] w-full flex flex-col items-center gap-4">
+          <div
+            className="relative p-4 sm:p-6 rounded-sm w-full max-w-[420px]"
+            style={{
+              background: "#FFFFFF",
+              boxShadow:
+                "0 20px 45px -15px rgba(33,28,23,0.18), 0 6px 14px -6px rgba(33,28,23,0.12)",
+            }}>
+            <QuoteCard {...cardProps} />
+            <span className="absolute -bottom-3 right-3 sm:right-4 bg-[#211C17] text-[#F0B84D] text-[9px] sm:text-[10px] font-mono tracking-wider px-2 py-1 rounded-sm uppercase">
+              {ratioLabel}
+            </span>
+          </div>
+
+          <button
+            onClick={downloadCard}
+            className="flex items-center justify-center gap-2 text-[13px] text-white bg-[#B4791E] hover:bg-[#a06a19] transition-colors px-4 py-2.5 rounded-md font-medium w-full max-w-[420px] min-h-[44px]">
+            <Download size={15} /> Download as Image
           </button>
         </div>
-        <div className="md:w-[40%] bg-[#1a1d26] rounded-xl p-4">
+
+        <div className="lg:w-[42%] w-full bg-white border border-[#EAE3D5] rounded-xl p-4 sm:p-5">
           <Controls {...controlProps} />
         </div>
       </div>
