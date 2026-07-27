@@ -20,18 +20,27 @@ export default function App() {
   const cardRef = useRef(null);
 
   const downloadCard = async () => {
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+    // Must open the tab synchronously, inside the click handler — if we wait
+    // until after html2canvas/toBlob resolve, Safari no longer treats it as
+    // part of the user gesture and silently blocks it.
+    const safariTab = isSafari ? window.open("", "_blank") : null;
+
     const canvas = await html2canvas(cardRef.current, { useCORS: true, allowTaint: true });
 
     canvas.toBlob((blob) => {
       if (!blob) return;
       const url = URL.createObjectURL(blob);
-      const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
       if (isSafari) {
-        // Safari (esp. iOS) ignores the `download` attribute on <a> tags,
-        // so link.click() would just open the image instead of saving it.
-        // Opening it in a new tab lets the user long-press / right-click to save.
-        window.open(url, "_blank");
+        if (safariTab) {
+          safariTab.location.href = url;
+        } else {
+          // Popup was blocked outright (e.g. strict Safari settings) — no
+          // way to open a new tab now, so let the user know directly.
+          alert("Your browser blocked the download. Please allow pop-ups for this site and try again.");
+        }
       } else {
         const link = document.createElement("a");
         link.download = "frameit-card.png";
