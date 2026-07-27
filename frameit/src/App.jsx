@@ -21,11 +21,26 @@ export default function App() {
 
   const downloadCard = async () => {
     const canvas = await html2canvas(cardRef.current, { useCORS: true, allowTaint: true });
-    const image = canvas.toDataURL("image/png");
-    const link = document.createElement("a");
-    link.download = "frameit-card.png";
-    link.href = image;
-    link.click();
+
+    canvas.toBlob((blob) => {
+      if (!blob) return;
+      const url = URL.createObjectURL(blob);
+      const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+      if (isSafari) {
+        // Safari (esp. iOS) ignores the `download` attribute on <a> tags,
+        // so link.click() would just open the image instead of saving it.
+        // Opening it in a new tab lets the user long-press / right-click to save.
+        window.open(url, "_blank");
+      } else {
+        const link = document.createElement("a");
+        link.download = "frameit-card.png";
+        link.href = url;
+        link.click();
+      }
+
+      setTimeout(() => URL.revokeObjectURL(url), 60000);
+    }, "image/png");
   };
 
   const cardProps = {
