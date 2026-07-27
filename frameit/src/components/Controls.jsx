@@ -14,12 +14,12 @@ import BackgroundPicker from "./BackgroundPicker";
 import ColorPicker from "./ColorPicker";
 
 const quoteCategories = [
-  { label: "Motivational", tag: "inspirational" },
+  { label: "Motivational", tag: "motivation" },
   { label: "Wisdom", tag: "wisdom" },
-  { label: "Love", tag: "love" },
+  { label: "Life", tag: "life" },
   { label: "Success", tag: "success" },
-  { label: "Friendship", tag: "friendship" },
-  { label: "Humor", tag: "humorous" },
+  { label: "Love", tag: "love" },
+  { label: "Humor", tag: "humor" },
 ];
 
 function SectionLabel({ children }) {
@@ -58,14 +58,27 @@ export default function Controls({
   const fetchQuote = async (tag) => {
     setMenuOpen(false);
     setLoading(true);
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 8000); // give up after 8s
+
     try {
-      const res = await fetch(`https://api.quotable.io/random?tags=${tag}`);
+      const res = await fetch(
+        `https://quoteslate.vercel.app/api/quotes/random?tags=${tag}`,
+        { signal: controller.signal }
+      );
+      if (!res.ok) throw new Error(`API returned ${res.status}`);
       const data = await res.json();
-      setQuote(data.content);
+      setQuote(data.quote);
       setAuthor(data.author);
     } catch (err) {
-      console.error("Couldn't fetch a quote:", err);
+      if (err.name === "AbortError") {
+        console.error("Quote request timed out");
+      } else {
+        console.error("Couldn't fetch a quote:", err);
+      }
     } finally {
+      clearTimeout(timeoutId);
       setLoading(false);
     }
   };
