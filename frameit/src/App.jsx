@@ -20,33 +20,20 @@ export default function App() {
   const cardRef = useRef(null);
 
   const downloadCard = async () => {
-    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-
-    // Must open the tab synchronously, inside the click handler — if we wait
-    // until after html2canvas/toBlob resolve, Safari no longer treats it as
-    // part of the user gesture and silently blocks it.
-    const safariTab = isSafari ? window.open("", "_blank") : null;
-
     const canvas = await html2canvas(cardRef.current, { useCORS: true, allowTaint: true });
 
     canvas.toBlob((blob) => {
       if (!blob) return;
       const url = URL.createObjectURL(blob);
 
-      if (isSafari) {
-        if (safariTab) {
-          safariTab.location.href = url;
-        } else {
-          // Popup was blocked outright (e.g. strict Safari settings) — no
-          // way to open a new tab now, so let the user know directly.
-          alert("Your browser blocked the download. Please allow pop-ups for this site and try again.");
-        }
-      } else {
-        const link = document.createElement("a");
-        link.download = "frameit-card.png";
-        link.href = url;
-        link.click();
-      }
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "frameit-card.png";
+      // Safari requires the anchor to actually be in the DOM for click()
+      // to trigger a real download rather than being silently ignored.
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
 
       setTimeout(() => URL.revokeObjectURL(url), 60000);
     }, "image/png");
