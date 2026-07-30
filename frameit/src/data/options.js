@@ -144,6 +144,26 @@ export const backgrounds = [
     type: "image",
     value: "/backgrounds/motivation10.png",
   },
+  {
+    label: "custom-bg11",
+    type: "image",
+    value: "/backgrounds/motivation11.JPG",
+  },
+  {
+    label: "custom-bg12",
+    type: "image",
+    value: "/backgrounds/motivation12.JPG",
+  },
+  {
+    label: "custom-bg13",
+    type: "image",
+    value: "/backgrounds/motivation13.JPG",
+  },
+  {
+    label: "custom-bg14",
+    type: "image",
+    value: "/backgrounds/motivation14.JPG",
+  },
 ];
 
 export const fontColors = [
