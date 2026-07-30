@@ -127,7 +127,7 @@ export const backgrounds = [
   {
     label: "custom-bg7",
     type: "image",
-    value: "/backgrounds/motivation8.png",
+    value: "/backgrounds/motivation7.png",
   },
   {
     label: "custom-bg8",
