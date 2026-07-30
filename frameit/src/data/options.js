@@ -94,6 +94,56 @@ export const backgrounds = [
     type: "image",
     value: "https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=800",
   },
+  {
+    label: "custom-bg1",
+    type: "image",
+    value: "/backgrounds/motivation1.png",
+  },
+  {
+    label: "custom-bg2",
+    type: "image",
+    value: "/backgrounds/motivation2.png",
+  },
+  {
+    label: "custom-bg3",
+    type: "image",
+    value: "/backgrounds/motivation3.png",
+  },
+  {
+    label: "custom-bg4",
+    type: "image",
+    value: "/backgrounds/motivation4.png",
+  },
+  {
+    label: "custom-bg5",
+    type: "image",
+    value: "/backgrounds/motivation5.png",
+  },
+  {
+    label: "custom-bg6",
+    type: "image",
+    value: "/backgrounds/motivation6.png",
+  },
+  {
+    label: "custom-bg7",
+    type: "image",
+    value: "/backgrounds/motivation8.png",
+  },
+  {
+    label: "custom-bg8",
+    type: "image",
+    value: "/backgrounds/motivation8.png",
+  },
+  {
+    label: "custom-bg9",
+    type: "image",
+    value: "/backgrounds/motivation9.png",
+  },
+  {
+    label: "custom-bg10",
+    type: "image",
+    value: "/backgrounds/motivation10.png",
+  },
 ];
 
 export const fontColors = [
